@@ -12,7 +12,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.aspectj.lang.annotation.After;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +41,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @EmbeddedKafka(controlledShutdown = true)
 @Slf4j
-public class KafkaProducerServiceIT {
+public class KafkaProducerServiceIntegrationTest {
 
     @Autowired
     private KafkaProducerService kafkaMessageProducerService;
