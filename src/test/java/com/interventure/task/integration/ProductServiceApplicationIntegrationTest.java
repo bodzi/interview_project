@@ -43,8 +43,8 @@ class ProductServiceApplicationIntegrationTest {
                 .content(request))
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-        //.andExpect(jsonPath("productId").value("1"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("1"));
     }
 
 }
