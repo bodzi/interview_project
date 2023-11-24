@@ -26,6 +26,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public long createProduct(CreateProductRequest productRequest) throws InternalServiceException {
+        
+        log.debug("create product called");
 
         Product product = Product.builder()
                 .name(productRequest.getName())

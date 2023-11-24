@@ -27,4 +27,4 @@ logging:
 app:
  kafka:
    producer:
-    topic: product-created
+    topic: product-created-test

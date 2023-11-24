@@ -29,8 +29,11 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Long> addProduct(@RequestBody CreateProductRequest request) throws InternalServiceException {
-
+        
+      
         ThreadContext.put("productRequest", request.toString());
+        
+        log.debug("add product called");
         long productId = productService.createProduct(request); 
         
         return new ResponseEntity<>(productId, HttpStatus.CREATED);
