@@ -1,0 +1,40 @@
+2023-11-22 21:26:04.088 INFO  [main] com.interventure.task.ProductServiceApplicationTests ---   : Starting ProductServiceApplicationTests using Java 21.0.1 with PID 33673 (started by bojana in /Users/bojana/Downloads/product-service-bojana-glisovic)
+2023-11-22 21:26:04.089 DEBUG [main] com.interventure.task.ProductServiceApplicationTests ---   : Running with Spring Boot v3.1.5, Spring v6.0.13
+2023-11-22 21:26:04.089 INFO  [main] com.interventure.task.ProductServiceApplicationTests ---   : No active profile set, falling back to 1 default profile: "default"
+2023-11-22 21:26:04.564 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate ---   : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-22 21:26:04.587 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate ---   : Finished Spring Data repository scanning in 19 ms. Found 1 JPA repository interfaces.
+2023-11-22 21:26:04.694 INFO  [main] org.springframework.cloud.context.scope.GenericScope ---   : BeanFactory id=19d47115-a4b6-3b4a-b352-fdc60795c2a1
+2023-11-22 21:26:05.196 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo ---   : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-22 21:26:05.210 INFO  [main] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Starting...
+2023-11-22 21:26:05.497 INFO  [main] com.zaxxer.hikari.pool.HikariPool ---   : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@21d8da75
+2023-11-22 21:26:05.499 INFO  [main] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Start completed.
+2023-11-22 21:26:06.012 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean ---   : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 21:26:06.371 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration ---   : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-11-22 21:26:06.826 INFO  [main] org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver ---   : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-11-22 21:26:06.871 INFO  [main] com.interventure.task.ProductServiceApplicationTests ---   : Started ProductServiceApplicationTests in 3.023 seconds (process running for 3.549)
+2023-11-22 21:26:07.264 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean ---   : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 21:26:07.265 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Shutdown initiated...
+2023-11-22 21:26:07.270 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Shutdown completed.
+2023-11-22 21:26:16.939 INFO  [main] com.interventure.task.ProductServiceApplication ---   : Starting ProductServiceApplication using Java 21.0.1 with PID 33717 (/Users/bojana/Downloads/product-service-bojana-glisovic/target/classes started by bojana in /Users/bojana/Downloads/product-service-bojana-glisovic)
+2023-11-22 21:26:16.940 DEBUG [main] com.interventure.task.ProductServiceApplication ---   : Running with Spring Boot v3.1.5, Spring v6.0.13
+2023-11-22 21:26:16.941 INFO  [main] com.interventure.task.ProductServiceApplication ---   : No active profile set, falling back to 1 default profile: "default"
+2023-11-22 21:26:17.398 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate ---   : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-22 21:26:17.424 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate ---   : Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interfaces.
+2023-11-22 21:26:17.538 INFO  [main] org.springframework.cloud.context.scope.GenericScope ---   : BeanFactory id=8a7e7621-390f-30f8-8fc5-bc521f39c140
+2023-11-22 21:26:17.886 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer ---   : Tomcat initialized with port(s): 8081 (http)
+2023-11-22 21:26:17.891 INFO  [main] org.apache.catalina.core.StandardService ---   : Starting service [Tomcat]
+2023-11-22 21:26:17.891 INFO  [main] org.apache.catalina.core.StandardEngine ---   : Starting Servlet engine: [Apache Tomcat/10.1.15]
+2023-11-22 21:26:18.007 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] ---   : Initializing Spring embedded WebApplicationContext
+2023-11-22 21:26:18.007 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext ---   : Root WebApplicationContext: initialization completed in 1041 ms
+2023-11-22 21:26:18.299 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo ---   : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-22 21:26:18.310 INFO  [main] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Starting...
+2023-11-22 21:26:18.504 INFO  [main] com.zaxxer.hikari.pool.HikariPool ---   : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2fa47368
+2023-11-22 21:26:18.505 INFO  [main] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Start completed.
+2023-11-22 21:26:18.941 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean ---   : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 21:26:19.198 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration ---   : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-11-22 21:26:19.600 INFO  [main] org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver ---   : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-11-22 21:26:19.644 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer ---   : Tomcat started on port(s): 8081 (http) with context path ''
+2023-11-22 21:26:19.660 INFO  [main] com.interventure.task.ProductServiceApplication ---   : Started ProductServiceApplication in 2.978 seconds (process running for 3.165)
+2023-11-22 21:28:24.072 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean ---   : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-11-22 21:28:24.079 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Shutdown initiated...
+2023-11-22 21:28:24.087 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource ---   : HikariPool-1 - Shutdown completed.

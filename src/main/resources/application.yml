@@ -1,0 +1,34 @@
+server:
+  port: 8081
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer 
+  datasource:
+    url: jdbc:mysql://localhost:3306/productdb
+    username: root
+    password: root@123
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  application:
+    name: PRODUCT-SERVICE
+logging:
+#  config: classpath:""
+  file:
+    path: logging/product-service.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-80.80c{1.} : %X : %m%n%ex"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger ---  %X : %msg%n"  
+  level:
+    org.springframework.web: ERROR
+    com.interventure.task: DEBUG
+    org.hibernate: ERROR
+    org.apache.kafka: ERROR
+app:
+ kafka:
+   producer:
+    topic: product-created

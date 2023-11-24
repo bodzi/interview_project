@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: ${spring.embedded.kafka.brokers}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer 
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:productdb;DB_CLOSE_ON_EXIT=FALSE
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  application:
+    name: PRODUCT-SERVICE
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-80.80c{1.} : %X : %m%n%ex"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger ---  %X : %msg%n"  
+  level:
+    org.springframework.web: ERROR
+    com.interventure.task: DEBUG
+    org.hibernate: INFO
+    org.apache.kafka: INFO
+app:
+ kafka:
+   producer:
+    topic: product-created
