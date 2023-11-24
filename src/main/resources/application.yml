@@ -19,7 +19,7 @@ spring:
 logging:
 #  config: classpath:""
   file:
-    path: logging/product-service.log
+    path: logging
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-80.80c{1.} : %X : %m%n%ex"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger ---  %X : %msg%n"  
@@ -31,4 +31,4 @@ logging:
 app:
  kafka:
    producer:
-    topic: product-created
+    topic: product-topic
