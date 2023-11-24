@@ -36,7 +36,7 @@ class ProductServiceApplicationIntegrationTest {
     }
 
     @Test
-    void addProduct_Created() throws Exception {
+    void addProduct_created() throws Exception {
         String request = "{\"name\": \"Product\",\"price\": 3}";
         mockMvc.perform(post("/product")
                 .contentType(MediaType.APPLICATION_JSON)

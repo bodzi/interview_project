@@ -24,8 +24,8 @@ logging:
   file:
     path: logging
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-80.80c{1.} : %X : %m%n%ex"
-    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger ---  %X : %msg%n"  
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%15.15t] %-80.80c{1.}  %X  %m%n%ex"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger ---  %X %msg%n"  
   level:
     org.springframework.web: ERROR
     com.interventure.task: DEBUG

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +41,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest()
 @ActiveProfiles("test")
 @EmbeddedKafka(controlledShutdown = true)
-@Slf4j
+@Log4j2
 public class KafkaProducerServiceIntegrationTest {
 
     @Autowired
