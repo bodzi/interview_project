@@ -7,17 +7,17 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer 
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:productdb;DB_CLOSE_ON_EXIT=FALSE
-#    url: jdbc:mysql://localhost:3306/productdb
-#    username: root
-#    password: root@123
+#    driverClassName: org.h2.Driver
+#    url: jdbc:h2:mem:productdb;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:mysql://localhost:3306/productdb
+    username: bojana
+    password: bojana@123
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-#      ddl-auto: update
-      ddl-auto: create-drop
+      ddl-auto: update
+#      ddl-auto: create-drop
   application:
     name: PRODUCT-SERVICE
 logging:
