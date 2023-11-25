@@ -2,25 +2,7 @@
 version: '3'
 
 services:
-  # Spring Boot Application
-  product-service:
-    container_name: product-service
-    image: product-service
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
-    depends_on:
-      - mysql
-      - kafka
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/productdb
-      SPRING_DATASOURCE_USERNAME: bojana
-      SPRING_DATASOURCE_PASSWORD: bojana@123
-      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-    networks:
-      - mynetwork
+
 
   # MySQL Database
   mysql:
@@ -48,6 +30,8 @@ services:
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: product-topic
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -58,6 +42,27 @@ services:
     image: wurstmeister/zookeeper:latest
     ports:
       - "2181:2181"
+    networks:
+      - mynetwork
+      
+        # Spring Boot Application
+  product-service:
+    container_name: product-service
+    image: product-service
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql
+      - kafka
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/productdb
+      SPRING_DATASOURCE_USERNAME: bojana
+      SPRING_DATASOURCE_PASSWORD: bojana@123
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     networks:
       - mynetwork
 networks:
