@@ -5,7 +5,10 @@ import com.interventure.task.service.KafkaProducerService;
 import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -23,7 +26,10 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
 
     @Value("${app.kafka.producer.topic}")
     private String topic;
- 
+
+    @Value("${spring.kafka.producer.bootstrap-servers}")
+    private String server;
+    
     @Override
     public void send(Message msg) {
 
@@ -31,10 +37,10 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
         future.whenComplete((result, ex) -> {
 
             if (ex == null) {
-                log.info("Succefuly sent message {} with offset [{}] to topic {}", msg, result.getRecordMetadata().offset(), topic);
+                log.info("Succefuly sent message {} with offset [{}] to topic {}, server {}", msg, result.getRecordMetadata().offset(), topic, server);
 
             } else {
-                log.error("Failed to sent message {} to topic {}. Exception {}", msg, topic, ex.getMessage());
+                log.error("Failed to sent message {} to topic {}, server {}. Exception {}", msg, topic, server, ex.getMessage());
 
             }
 

@@ -12,35 +12,35 @@ services:
       MYSQL_USER: bojana
       MYSQL_PASSWORD: bojana@123
     ports:
-      - "3306:3306"
-    networks:
-      - mynetwork
+      - 3306:3306
 
   # Apache Kafka
   kafka:
     image: wurstmeister/kafka:latest
     container_name: kafka
     ports:
-      - "9092:9092"
+      - 9092:9092
+    hostname: kafka
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
+      KAFKA_LISTENERS: INSIDE://kafka:9092,OUTSIDE://0.0.0.0:9093
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "product-topic:1:1"
+      KAFKA_CREATE_TOPICS: product-topic:1:1
+    links:
+      - zookeeper
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - mynetwork
+
 
   # Zookeeper for Kafka
   zookeeper:
     image: wurstmeister/zookeeper:latest
+    container_name: zookeeper
     ports:
-      - "2181:2181"
-    networks:
-      - mynetwork
+      - 2181:2181
+
       
         # Spring Boot Application
   product-service:
@@ -51,17 +51,15 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"
+      - 8081:8081
     depends_on:
       - mysql
       - kafka
+      - zookeeper
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/productdb
       SPRING_DATASOURCE_USERNAME: bojana
       SPRING_DATASOURCE_PASSWORD: bojana@123
-      SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka:9092
-    networks:
-      - mynetwork
-networks:
-    mynetwork:
-      driver: bridge
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka:9092    
+
+
