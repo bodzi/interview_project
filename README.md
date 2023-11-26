@@ -13,14 +13,15 @@ This project is a Spring Boot service that manages products in a distributed sys
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-    - [Docker](#docker)
+   - [Docker](#docker)
+     - [Build Image] (#build-image)
+     - [Docker Compose](#docker-compose)
+     - [Connecting to Kafka](#connecting-to-kafka)
 - [Usage](#usage)
   - [Creating a Product](#creating-a-product)
 - [Tests](#tests)
   - [Unit Tests](#unit-tests)
   - [Integration Tests](#integration-tests)
-- [Docker](#docker-1)
-  - [Docker Compose](#docker-compose)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -49,11 +50,12 @@ This project is a Spring Boot service that manages products in a distributed sys
    ```
 
 
-## Docker
+#### Docker
 
 Docker support is available for running and testing the service in containers.
 
-### Build image for product-service
+
+#### Build Image
 
 Building of image will also build project so you do not need to have Java 18 on your machine.
 
@@ -61,7 +63,7 @@ Building of image will also build project so you do not need to have Java 18 on 
 docker build -t product-service .
 ```
 
-### Docker Compose
+#### Docker Compose
 
 Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
 
@@ -76,18 +78,37 @@ To stop the containers:
 ```bash
 docker-compose down
 ```
+#### Connecting to Kafka
 
-### Usage
+To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
+
+#### Connecting to Kafka
+
+To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
+
+Example using Kafkacat:
+
+1. Install Kafkacat:
+
+   ```bash
+   # On Linux (Debian/Ubuntu)
+   sudo apt-get install kafkacat
+
+   # On macOS (Homebrew)
+   brew install kafkacat
+   ```
+
+## Usage
 
 #### Creating a Product
 
-To create a product, send a POST request to the endpoint `/api/products` with the product details in the request body.
+To create a product, send a POST request to the endpoint `/product` with the product details in the request body.
 
 Example using cURL:
 
 ```bash
 curl -X POST \
-  http://localhost:8081/api/products \
+  http://localhost:8081/product \
   -H 'Content-Type: application/json' \
   -d '{
     "name": "Sample Product",
