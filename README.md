@@ -55,32 +55,29 @@ This project is a Spring Boot service that manages products in a distributed sys
 Docker support is available for running and testing the service in containers.
 
 
-#### Build Image
+ 1. Build image for product-service:
 
-Building of image will also build project so you do not need to have Java 18 on your machine.
+    Building of image will also build project so you do not need to have Java 18 on your machine.
 
-```bash
-docker build -t product-service .
+    ```bash
+    docker build -t product-service .
 ```
 
-#### Docker Compose
+2. Running containers
 
-Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
+    Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
 
-```bash
-docker-compose up -d
+    ```bash
+    docker-compose up -d
+    ```
+
+    This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
+
+    To stop the containers:
+
+    ```bash
+    docker-compose down
 ```
-
-This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
-
-To stop the containers:
-
-```bash
-docker-compose down
-```
-#### Connecting to Kafka
-
-To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
 
 #### Connecting to Kafka
 
@@ -97,6 +94,33 @@ Example using Kafkacat:
    # On macOS (Homebrew)
    brew install kafkacat
    ```
+Connect to the Kafka container:
+
+  ```bash
+    kafkacat -b localhost:9092 -C -t product-topic
+   ```
+
+This command subscribes to the product-topic and consumes messages.
+
+Send a product creation request:
+
+    ```bash
+    curl -X POST \
+      http://localhost:8080/api/products \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "name": "Sample Product",
+        "price": 19.99
+      }'
+    ```
+Observe the received message in the Kafkacat terminal.
+
+Example of received message on broker:
+
+json
+Copy code
+{"action":"CREATED","product":{"productId":4,"name":"Sample Product","price":19.99}}
+
 
 ## Usage
 
