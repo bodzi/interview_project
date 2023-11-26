@@ -48,9 +48,34 @@ This project is a Spring Boot service that manages products in a distributed sys
    ./mvnw spring-boot:run
    ```
 
-#### Docker
 
-Alternatively, you can use Docker for running the entire system with MySQL, Kafka, and the Spring Boot service.
+## Docker
+
+Docker support is available for running and testing the service in containers.
+
+## Build image for product-service
+
+Building of image will also build project so you do not need to have Java 18 on your machine.
+
+```bash
+docker build -t your-docker-image-name .
+```
+
+### Docker Compose
+
+Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
+
+```bash
+docker-compose up -d
+```
+
+This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
+
+To stop the containers:
+
+```bash
+docker-compose down
+```
 
 ### Usage
 
@@ -62,7 +87,7 @@ Example using cURL:
 
 ```bash
 curl -X POST \
-  http://localhost:8080/api/products \
+  http://localhost:8081/api/products \
   -H 'Content-Type: application/json' \
   -d '{
     "name": "Sample Product",
@@ -88,25 +113,6 @@ Run integration tests with:
 ./mvnw integration-test
 ```
 
-## Docker
-
-Docker support is available for running and testing the service in containers.
-
-### Docker Compose
-
-Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
-
-```bash
-docker-compose up -d
-```
-
-This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
-
-To stop the containers:
-
-```bash
-docker-compose down
-```
 
 ## Contributing
 
@@ -115,35 +121,4 @@ If you would like to contribute to this project, please fork the repository, mak
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
 
-### Docker Instructions
-
-Add the following section to your README to provide instructions on how to run the containers:
-
-```markdown
-## Docker
-
-Docker support is available for running and testing the service in containers.
-
-### Docker Compose
-
-Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
-
-```bash
-docker-compose up -d
-```
-
-This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
-
-To stop the containers:
-
-```bash
-docker-compose down
-```
-
-```bash
-docker-compose down
-```
-
-This command will stop and remove the containers. Adjust the commands based on your specific needs.
