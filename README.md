@@ -1,0 +1,149 @@
+
+# Interview Project - Product Service
+
+[![Java](https://img.shields.io/badge/Java-18-blue)](https://openjdk.java.net/projects/jdk/18/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1.5-green)](https://spring.io/projects/spring-boot)
+[![Kafka](https://img.shields.io/badge/Apache%20Kafka-2.8.1-red)](https://kafka.apache.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-latest-orange)](https://www.mysql.com/)
+
+This project is a Spring Boot service that manages products in a distributed system. It includes functionality to create products and communicate changes in near real-time using Apache Kafka.
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+    - [Docker](#docker)
+- [Usage](#usage)
+  - [Creating a Product](#creating-a-product)
+- [Tests](#tests)
+  - [Unit Tests](#unit-tests)
+  - [Integration Tests](#integration-tests)
+- [Docker](#docker-1)
+  - [Docker Compose](#docker-compose)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Getting Started
+
+### Prerequisites
+
+- Java 18: [Download](https://openjdk.java.net/projects/jdk/18/)
+- Apache Kafka 2.8.1: [Download](https://kafka.apache.org/downloads)
+- MySQL: [Download](https://www.mysql.com/downloads/)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:bodzi/interview_project.git
+   cd interview_project
+   ```
+
+2. Build and run the project:
+
+   ```bash
+   ./mvnw clean install
+   ./mvnw spring-boot:run
+   ```
+
+#### Docker
+
+Alternatively, you can use Docker for running the entire system with MySQL, Kafka, and the Spring Boot service.
+
+### Usage
+
+#### Creating a Product
+
+To create a product, send a POST request to the endpoint `/api/products` with the product details in the request body.
+
+Example using cURL:
+
+```bash
+curl -X POST \
+  http://localhost:8080/api/products \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Sample Product",
+    "price": 19.99
+  }'
+```
+
+## Tests
+
+### Unit Tests
+
+Run unit tests with:
+
+```bash
+./mvnw test
+```
+
+### Integration Tests
+
+Run integration tests with:
+
+```bash
+./mvnw integration-test
+```
+
+## Docker
+
+Docker support is available for running and testing the service in containers.
+
+### Docker Compose
+
+Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
+
+```bash
+docker-compose up -d
+```
+
+This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
+
+To stop the containers:
+
+```bash
+docker-compose down
+```
+
+## Contributing
+
+If you would like to contribute to this project, please fork the repository, make your changes, and submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+```
+
+### Docker Instructions
+
+Add the following section to your README to provide instructions on how to run the containers:
+
+```markdown
+## Docker
+
+Docker support is available for running and testing the service in containers.
+
+### Docker Compose
+
+Use the provided `docker-compose.yml` file to run MySQL, Kafka, and the Spring Boot service together:
+
+```bash
+docker-compose up -d
+```
+
+This command will start containers for MySQL, Kafka, and the Spring Boot service in the background.
+
+To stop the containers:
+
+```bash
+docker-compose down
+```
+
+```bash
+docker-compose down
+```
+
+This command will stop and remove the containers. Adjust the commands based on your specific needs.
