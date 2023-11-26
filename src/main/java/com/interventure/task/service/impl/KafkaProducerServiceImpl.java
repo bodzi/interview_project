@@ -23,7 +23,7 @@ public class KafkaProducerServiceImpl implements KafkaProducerService {
 
     @Value("${app.kafka.producer.topic}")
     private String topic;
-
+ 
     @Override
     public void send(Message msg) {
 
