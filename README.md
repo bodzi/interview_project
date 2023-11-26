@@ -85,7 +85,6 @@ To create a product, send a POST request to the endpoint `/product` with the pro
 
 Example using cURL:
 
-    ```bash
     curl -X POST \
       http://localhost:8081/product \
       -H 'Content-Type: application/json' \
@@ -93,11 +92,11 @@ Example using cURL:
         "name": "Sample Product",
         "price": 19.99
       }'
-    ```
+
 
 #### Verify Message
 
-    To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
+To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
 
 1. Install Kafkacat:
 
