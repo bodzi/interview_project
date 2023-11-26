@@ -3,7 +3,6 @@ package com.interventure.task.controller;
 import com.interventure.task.dto.request.CreateProductRequest;
 import com.interventure.task.exception.InternalServiceException;
 import com.interventure.task.service.ProductService;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.ThreadContext;

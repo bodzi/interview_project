@@ -17,12 +17,11 @@ This project is a Spring Boot service that manages products in a distributed sys
     - [Docker](#docker)
 - [Usage](#usage)
   - [Creating a Product](#creating-a-product)
-  - [Connecting to Kafka](#connecting-to-kafka)
+  - [Verify Message](#connecting-to-kafka)
 - [Tests](#tests)
   - [Unit Tests](#unit-tests)
   - [Integration Tests](#integration-tests)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Getting Started
 
@@ -82,9 +81,9 @@ Docker support is available for running and testing the service in containers.
 
 #### Creating a Product
 
-    To create a product, send a POST request to the endpoint `/product` with the product details in the request body.
+To create a product, send a POST request to the endpoint `/product` with the product details in the request body.
 
-    Example using cURL:
+Example using cURL:
 
     ```bash
     curl -X POST \
@@ -96,7 +95,7 @@ Docker support is available for running and testing the service in containers.
       }'
     ```
 
-#### Connecting to Kafka to Verify Message
+#### Verify Message
 
     To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
 

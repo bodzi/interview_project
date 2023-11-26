@@ -3,7 +3,6 @@ package com.interventure.task.controller;
 import com.interventure.task.dto.response.ErrorResponse;
 import com.interventure.task.exception.InternalServiceException;
 import com.interventure.task.exception.ProductServiceException;
-import jakarta.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
