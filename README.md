@@ -53,12 +53,12 @@ This project is a Spring Boot service that manages products in a distributed sys
 
 Docker support is available for running and testing the service in containers.
 
-## Build image for product-service
+### Build image for product-service
 
 Building of image will also build project so you do not need to have Java 18 on your machine.
 
 ```bash
-docker build -t your-docker-image-name .
+docker build -t product-service .
 ```
 
 ### Docker Compose
