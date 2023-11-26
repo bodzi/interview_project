@@ -13,12 +13,11 @@ This project is a Spring Boot service that manages products in a distributed sys
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-   - [Docker](#docker)
-     - [Build Image] (#build-image)
-     - [Docker Compose](#docker-compose)
-     - [Connecting to Kafka](#connecting-to-kafka)
+    - [Running Locally](#running-locally)
+    - [Docker](#docker)
 - [Usage](#usage)
   - [Creating a Product](#creating-a-product)
+  - [Connecting to Kafka](#connecting-to-kafka)
 - [Tests](#tests)
   - [Unit Tests](#unit-tests)
   - [Integration Tests](#integration-tests)
@@ -27,13 +26,15 @@ This project is a Spring Boot service that manages products in a distributed sys
 
 ## Getting Started
 
-### Prerequisites
+### Prerequisites for running on local machine
 
 - Java 18: [Download](https://openjdk.java.net/projects/jdk/18/)
 - Apache Kafka 2.8.1: [Download](https://kafka.apache.org/downloads)
 - MySQL: [Download](https://www.mysql.com/downloads/)
 
 ### Installation
+
+#### Running Locally
 
 1. Clone the repository:
 
@@ -42,7 +43,7 @@ This project is a Spring Boot service that manages products in a distributed sys
    cd interview_project
    ```
 
-2. Build and run the project:
+2. Run the project: 
 
    ```bash
    ./mvnw clean install
@@ -50,18 +51,16 @@ This project is a Spring Boot service that manages products in a distributed sys
    ```
 
 
-#### Docker
+### Docker
 
 Docker support is available for running and testing the service in containers.
 
 
  1. Build image for product-service:
 
-    Building of image will also build project so you do not need to have Java 18 on your machine.
-
     ```bash
     docker build -t product-service .
-```
+    ```
 
 2. Running containers
 
@@ -77,13 +76,29 @@ Docker support is available for running and testing the service in containers.
 
     ```bash
     docker-compose down
-```
+    ```
 
-#### Connecting to Kafka
+## Usage
 
-To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
+#### Creating a Product
 
-Example using Kafkacat:
+    To create a product, send a POST request to the endpoint `/product` with the product details in the request body.
+
+    Example using cURL:
+
+    ```bash
+    curl -X POST \
+      http://localhost:8081/product \
+      -H 'Content-Type: application/json' \
+      -d '{
+        "name": "Sample Product",
+        "price": 19.99
+      }'
+    ```
+
+#### Connecting to Kafka to Verify Message
+
+    To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
 
 1. Install Kafkacat:
 
@@ -94,51 +109,33 @@ Example using Kafkacat:
    # On macOS (Homebrew)
    brew install kafkacat
    ```
-Connect to the Kafka container:
+2. Connect to the Kafka container using kafkacat:
 
-  ```bash
+    ```bash
     kafkacat -b localhost:9092 -C -t product-topic
-   ```
+    ```
 
-This command subscribes to the product-topic and consumes messages.
+    This command subscribes to the product-topic and consumes messages.
 
-Send a product creation request:
+3. Send a product creation request:
 
     ```bash
     curl -X POST \
-      http://localhost:8080/api/products \
+      http://localhost:8081/product \
       -H 'Content-Type: application/json' \
       -d '{
-        "name": "Sample Product",
+        "name": "Product",
         "price": 19.99
       }'
     ```
-Observe the received message in the Kafkacat terminal.
+4. Observe the received message in the Kafkacat terminal.
 
-Example of received message on broker:
+    Example of received message on broker:
 
-json
-Copy code
-{"action":"CREATED","product":{"productId":4,"name":"Sample Product","price":19.99}}
+    ```bash
+    {"action":"CREATED","product":{"productId":4,"name":"Product","price":19.99}}
+    ```
 
-
-## Usage
-
-#### Creating a Product
-
-To create a product, send a POST request to the endpoint `/product` with the product details in the request body.
-
-Example using cURL:
-
-```bash
-curl -X POST \
-  http://localhost:8081/product \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "name": "Sample Product",
-    "price": 19.99
-  }'
-```
 
 ## Tests
 
@@ -159,11 +156,4 @@ Run integration tests with:
 ```
 
 
-## Contributing
-
-If you would like to contribute to this project, please fork the repository, make your changes, and submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
