@@ -5,11 +5,12 @@ WORKDIR /app
 ## Copy the pom.xml and the project files to the container
 COPY pom.xml .
 ## Download dependencies
-#RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B
 ## Copy the source code
 COPY src ./src
 ## Build the application using Maven
 RUN mvn clean package -DskipTests
+#RUN mvn clean package 
 
 ## Use an official OpenJDK 21 image as a parent image
 FROM openjdk:18-slim
