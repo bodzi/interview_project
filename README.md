@@ -25,11 +25,15 @@ This project is a Spring Boot service that manages products in a distributed sys
 
 ## Getting Started
 
-### Prerequisites for running on the local machine
+### Prerequisites
+
+For running on local machine you will need: 
 
 - Java 18: [Download](https://openjdk.java.net/projects/jdk/18/)
 - Apache Kafka 2.8.1: [Download](https://kafka.apache.org/downloads)
+    - run it on port 9092. create a topic produc-topic
 - MySQL: [Download](https://www.mysql.com/downloads/)
+    - run in to port 3306. Make a db called productdb with username bojana and pass bojana@123
 
 ### Installation
 
