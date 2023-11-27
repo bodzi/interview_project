@@ -28,8 +28,6 @@ class ProductServiceApplicationIntegrationTest {
     @Autowired
     private WebApplicationContext context;
 
-  
-
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -45,6 +43,43 @@ class ProductServiceApplicationIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().string("1"));
+    }
+
+    @Test
+    void addProduct_badRequest_negativePrice() throws Exception {
+        String request = "{\"name\": \"Product\",\"price\": -1}";
+        mockMvc.perform(post("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\n"
+                        + "    \"errorMessage\": \"Price must not be negative.\",\n"
+                        + "    \"errorCode\": 400\n"
+                        + "}"));
+    }
+
+    @Test
+    void addProduct_notFound() throws Exception {
+        String request = "{\"name\": \"Product2\",\"price\": 1}";
+        mockMvc.perform(post("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+        mockMvc.perform(post("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(request))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\n"
+                        + "    \"errorMessage\": \"400: Product with the Product2 name already exists\",\n"
+                        + "    \"errorCode\": 400\n"
+                        + "}"));
     }
 
 }
