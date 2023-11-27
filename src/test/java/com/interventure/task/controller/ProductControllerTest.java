@@ -2,11 +2,11 @@ package com.interventure.task.controller;
 
 import com.interventure.task.dto.request.CreateProductRequest;
 import com.interventure.task.exception.InternalServiceException;
+import com.interventure.task.exception.ProductServiceException;
 import com.interventure.task.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +34,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void addProduct_successful() throws InternalServiceException {
+    void addProduct_successful() throws ProductServiceException {
 
         when(productServiceMock.createProduct(any(CreateProductRequest.class))).thenReturn(1L);
 
@@ -46,16 +46,16 @@ class ProductControllerTest {
     }
 
     @Test
-    void addProduct_exception() throws InternalServiceException {
+    void addProduct_exception() throws ProductServiceException {
 
-        when(productServiceMock.createProduct(any(CreateProductRequest.class))).thenThrow(new InternalServiceException("Test Exception"));
+        when(productServiceMock.createProduct(any(CreateProductRequest.class))).thenThrow(new InternalServiceException(new Exception("Test Exception")));
 
         InternalServiceException exception = assertThrows(
                 InternalServiceException.class, ()
                 -> productController.addProduct(productRequest)
         );
 
-        assertEquals("Test Exception", exception.getMessage());
+        assertEquals("500: Test Exception", exception.getMessage());
         verify(productServiceMock, times(1)).createProduct(any(CreateProductRequest.class));
     }
 }

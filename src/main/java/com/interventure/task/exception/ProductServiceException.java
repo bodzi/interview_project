@@ -10,12 +10,17 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class ProductServiceException extends RuntimeException{
+public class ProductServiceException extends Exception{
 
-    private String errorCode;
+    private ErrorCode errorCode;
 
-    public ProductServiceException(String message, String errorCode) {
-        super(message);
+    public ProductServiceException(String message, ErrorCode errorCode) {
+        super(errorCode.getValue()+": "+message);
+        this.errorCode = errorCode;
+    }
+    
+    public ProductServiceException( ErrorCode errorCode, Throwable th) {
+        super(errorCode.getValue()+": "+th.getMessage(), th);
         this.errorCode = errorCode;
     }
 }

@@ -1,11 +1,10 @@
 package com.interventure.task.controller;
 
 import com.interventure.task.dto.response.ErrorResponse;
+import com.interventure.task.exception.ErrorCode;
 import com.interventure.task.exception.InternalServiceException;
 import com.interventure.task.exception.ProductServiceException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -34,19 +33,24 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
 
         log.error(exception.getMessage());
-        Map<String, List<String>> body = new HashMap<>();
+
 
         List<String> errors = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
-
-        body.put("Errors: ", errors);
-
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        
+        String allErrors = errors.stream().map(Object::toString).collect(Collectors.joining(","));
+        
+        return new ResponseEntity<>(ErrorResponse.builder()
+                .errorMessage(allErrors)
+                .errorCode(ErrorCode.BAD_REQUEST.getValue())
+                .build(), HttpStatus.BAD_REQUEST);
 
     }
+    
+    
 
     @ExceptionHandler(ProductServiceException.class)
     public ResponseEntity<ErrorResponse> handleProductServiceException(ProductServiceException exception) {
@@ -54,16 +58,16 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         log.error(exception.getMessage());
         return new ResponseEntity<>(ErrorResponse.builder()
                 .errorMessage(exception.getMessage())
-                .errorCode(exception.getErrorCode())
+                .errorCode(exception.getErrorCode().getValue())
                 .build(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InternalServiceException.class)
     public ResponseEntity<ErrorResponse> handleProductServiceException(InternalServiceException exception) {
-        log.error(exception.getMessage());
+        log.error(exception.getStackTrace());
         return new ResponseEntity<>(ErrorResponse.builder()
                 .errorMessage(exception.getMessage())
-                .errorCode("500")
+                .errorCode(ErrorCode.INTERNAL_ERROR.getValue())
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

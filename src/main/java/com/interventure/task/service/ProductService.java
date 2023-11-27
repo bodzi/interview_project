@@ -2,7 +2,7 @@
 package com.interventure.task.service;
 
 import com.interventure.task.dto.request.CreateProductRequest;
-import com.interventure.task.exception.InternalServiceException;
+import com.interventure.task.exception.ProductServiceException;
 
 
 /**
@@ -11,7 +11,7 @@ import com.interventure.task.exception.InternalServiceException;
  */
 public interface ProductService {
        
-    long createProduct(CreateProductRequest productRequest) throws InternalServiceException;
+    long createProduct(CreateProductRequest productRequest) throws ProductServiceException;
 
     
 }

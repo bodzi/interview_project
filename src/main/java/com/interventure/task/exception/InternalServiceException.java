@@ -10,13 +10,11 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class InternalServiceException extends Exception{
-
-    public InternalServiceException(String message) {
-        super(message);
-    }
+public class InternalServiceException extends ProductServiceException{
     
-    public InternalServiceException(String message, Throwable th) {
-        super(message, th);
+     public InternalServiceException(Throwable ex) {
+        super(ErrorCode.INTERNAL_ERROR, ex);
+
     }
+
 }

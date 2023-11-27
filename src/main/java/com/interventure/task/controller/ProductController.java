@@ -1,7 +1,7 @@
 package com.interventure.task.controller;
 
 import com.interventure.task.dto.request.CreateProductRequest;
-import com.interventure.task.exception.InternalServiceException;
+import com.interventure.task.exception.ProductServiceException;
 import com.interventure.task.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Long> addProduct (@Valid @RequestBody CreateProductRequest request) throws InternalServiceException {          
+    public ResponseEntity<Long> addProduct (@Valid @RequestBody CreateProductRequest request) throws ProductServiceException {          
         ThreadContext.put("request-body", request.toString());
         
         log.debug("add product called");

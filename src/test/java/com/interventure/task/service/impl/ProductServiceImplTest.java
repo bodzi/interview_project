@@ -2,10 +2,13 @@ package com.interventure.task.service.impl;
 
 import com.interventure.task.dto.request.CreateProductRequest;
 import com.interventure.task.entitiy.Product;
+import com.interventure.task.exception.ErrorCode;
 import com.interventure.task.exception.InternalServiceException;
+import com.interventure.task.exception.ProductServiceException;
 import com.interventure.task.message.Message;
 import com.interventure.task.repository.ProductRepository;
 import com.interventure.task.service.KafkaProducerService;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +44,7 @@ public class ProductServiceImplTest {
      * Test of createProduct method, of class ProductServiceImpl.
      */
     @Test
-    public void createProduct_successful() throws InternalServiceException {
+    public void createProduct_successful() throws ProductServiceException {
         System.out.println("createProduct");
 
         long expResult = 0L;
@@ -59,8 +62,8 @@ public class ProductServiceImplTest {
 
     }
 
-    @Test()
-    public void createProduct_exception() {
+    @Test
+    public void createProduct_InternalServiceException() {
         System.out.println("createProduct");
 
         when(productRepositoryMock.save(any(Product.class))).thenThrow(IllegalArgumentException.class);
@@ -68,7 +71,24 @@ public class ProductServiceImplTest {
         InternalServiceException exception = assertThrows(InternalServiceException.class, ()
                 -> productService.createProduct(productRequest));
 
-        String expectedMessage = "Internal error";
+        String expectedMessage = ErrorCode.INTERNAL_ERROR.getValue()+":";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+    
+    @Test
+    public void createProduct_ProductServiceException() {
+        System.out.println("createProduct");
+        
+        Optional<Product> product = Optional.of(Product.builder().name(productRequest.getName()).price(0).build()) ;
+
+        when(productRepositoryMock.findByName(productRequest.getName())).thenReturn(product);
+
+        ProductServiceException exception = assertThrows(ProductServiceException.class, ()
+                -> productService.createProduct(productRequest));
+
+        String expectedMessage = ErrorCode.BAD_REQUEST.getValue()+":";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
