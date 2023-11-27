@@ -31,9 +31,9 @@ For running on local machine you will need:
 
 - Java 18: [Download](https://openjdk.java.net/projects/jdk/18/)
 - Apache Kafka 2.8.1: [Download](https://kafka.apache.org/downloads)
-    - run it on port 9092. create a topic produc-topic
+    - Run it on port 9092. Create a topic product-topic
 - MySQL: [Download](https://www.mysql.com/downloads/)
-    - run in to port 3306. Make a db called productdb with username bojana and pass bojana@123
+    - Run in to port 3306. Make a db called productdb with username bojana and pass bojana@123
 
 ### Installation
 
@@ -123,7 +123,7 @@ To connect to the Kafka container and verify produced messages, you can use a to
         "price": 19.99
       }'
     ```
-4. Observe the received message in the Kafkacat terminal.
+4. Observe the received message.
 
     Example of received message on broker:
 
