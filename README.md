@@ -17,7 +17,7 @@ This project is a Spring Boot service that manages products in a distributed sys
     - [Docker](#docker)
 - [Usage](#usage)
   - [Creating a Product](#creating-a-product)
-  - [Verify Message](#connecting-to-kafka)
+  - [Verify Message](#verify-message)
 - [Tests](#tests)
   - [Unit Tests](#unit-tests)
   - [Integration Tests](#integration-tests)
@@ -25,7 +25,7 @@ This project is a Spring Boot service that manages products in a distributed sys
 
 ## Getting Started
 
-### Prerequisites for running on local machine
+### Prerequisites for running on the local machine
 
 - Java 18: [Download](https://openjdk.java.net/projects/jdk/18/)
 - Apache Kafka 2.8.1: [Download](https://kafka.apache.org/downloads)
