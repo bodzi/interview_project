@@ -1,6 +1,7 @@
 package com.interventure.task.controller;
 
 import com.interventure.task.dto.request.CreateProductRequest;
+import com.interventure.task.exception.ErrorCode;
 import com.interventure.task.exception.InternalServiceException;
 import com.interventure.task.exception.ProductServiceException;
 import com.interventure.task.service.ProductService;
@@ -46,7 +47,7 @@ class ProductControllerTest {
     }
 
     @Test
-    void addProduct_exception() throws ProductServiceException {
+    void addProduct_InternalServiceException() throws ProductServiceException {
 
         when(productServiceMock.createProduct(any(CreateProductRequest.class))).thenThrow(new InternalServiceException(new Exception("Test Exception")));
 
@@ -56,6 +57,20 @@ class ProductControllerTest {
         );
 
         assertEquals("500: Test Exception", exception.getMessage());
+        verify(productServiceMock, times(1)).createProduct(any(CreateProductRequest.class));
+    }
+    
+     @Test
+    void addProduct_ProductServiceException() throws ProductServiceException {
+
+        when(productServiceMock.createProduct(any(CreateProductRequest.class))).thenThrow(new ProductServiceException("Test Exception" ,ErrorCode.BAD_REQUEST));
+
+        ProductServiceException exception = assertThrows(
+                ProductServiceException.class, ()
+                -> productController.addProduct(productRequest)
+        );
+
+        assertEquals("400: Test Exception", exception.getMessage());
         verify(productServiceMock, times(1)).createProduct(any(CreateProductRequest.class));
     }
 }
