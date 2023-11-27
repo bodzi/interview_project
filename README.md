@@ -98,23 +98,16 @@ Example using cURL:
 
 To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
 
-1. Install Kafkacat:
-
-   ```bash
-   # On Linux (Debian/Ubuntu)
-   sudo apt-get install kafkacat
-
-   # On macOS (Homebrew)
-   brew install kafkacat
-   ```
-2. Connect to the Kafka container using kafkacat:
+1. Connect to the Kafka container:
 
     ```bash
-    kafkacat -b localhost:9092 -C -t product-topic
+    docker exec -it kafka /bin/sh
     ```
+2. Than consume messages from product-topic:
 
-    This command subscribes to the product-topic and consumes messages.
-
+    ```bash
+    /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9093 --topic product-topic
+    ```
 3. Send a product creation request:
 
     ```bash
