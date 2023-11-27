@@ -16,7 +16,7 @@ public class CreateProductRequest {
     @NotNull(message = "Name is required.")
     private String name;
     @NotNull(message = "Price is required.")
-    @PositiveOrZero(message = "Price must be negative")
+    @PositiveOrZero(message = "Price must not be negative.")
     private double price;
 
 }

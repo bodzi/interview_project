@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,14 +24,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  * @author bojana
  */
 @ControllerAdvice
+@Log4j2
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-      
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+            HttpHeaders headers,
+            HttpStatusCode status,
+            WebRequest request) {
+
+        log.error(exception.getMessage());
         Map<String, List<String>> body = new HashMap<>();
 
-        List<String> errors = ex.getBindingResult()
+        List<String> errors = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
@@ -39,13 +45,13 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         body.put("Errors: ", errors);
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
-    
+
     }
-    
-    
 
     @ExceptionHandler(ProductServiceException.class)
     public ResponseEntity<ErrorResponse> handleProductServiceException(ProductServiceException exception) {
+        
+        log.error(exception.getMessage());
         return new ResponseEntity<>(ErrorResponse.builder()
                 .errorMessage(exception.getMessage())
                 .errorCode(exception.getErrorCode())
@@ -54,6 +60,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(InternalServiceException.class)
     public ResponseEntity<ErrorResponse> handleProductServiceException(InternalServiceException exception) {
+        log.error(exception.getMessage());
         return new ResponseEntity<>(ErrorResponse.builder()
                 .errorMessage(exception.getMessage())
                 .errorCode("500")

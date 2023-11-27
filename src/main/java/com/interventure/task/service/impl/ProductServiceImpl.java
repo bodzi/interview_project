@@ -41,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
             log.info("Product created {}", product.getProductId());
             return product.getProductId();
         } catch (Throwable ex) {
+           
             throw new InternalServiceException("Internal error", ex);
         }
 
