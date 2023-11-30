@@ -100,7 +100,7 @@ Example using cURL:
 
 #### Verify Message
 
-To connect to the Kafka container and verify produced messages, you can use a tool like [Kafkacat](https://github.com/edenhill/kafkacat) or the built-in Kafka console tools.
+To connect to the Kafka container and verify produced messages.
 
 1. Connect to the Kafka container:
 
@@ -111,6 +111,11 @@ To connect to the Kafka container and verify produced messages, you can use a to
 
     ```bash
     /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9093 --topic product-topic
+    ```
+    or this way:
+
+    ```bash
+    /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092 --topic product-topic
     ```
 3. Send a product creation request:
 
