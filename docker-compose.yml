@@ -19,7 +19,6 @@ services:
     image: wurstmeister/kafka:latest
     container_name: kafka
     ports:
-      - 9092:9092
       - 9093:9093
     hostname: kafka
     environment:
@@ -39,8 +38,7 @@ services:
   zookeeper:
     image: wurstmeister/zookeeper:latest
     container_name: zookeeper
-    ports:
-      - 2181:2181
+
 
       
         # Spring Boot Application
